@@ -1,0 +1,42 @@
+{
+  "src": {
+    "css": {
+      "entry": "./src/css/main.scss",
+      "all": "./src/css/**/*.scss"
+    },
+    "js": {
+      "vendor": [
+        "./node_modules/babel-polyfill/dist/polyfill.js",
+        "./node_modules/jquery/dist/jquery.js",
+        "./node_modules/magnific-popup/dist/jquery.magnific-popup.js",
+        "./src/vendor/picturefill/dist/picturefill.js"
+      ],
+      "entry": "./src/js/app.js",
+      "utilities": "./src/js/utilities.js",
+      "app": "./src/js/app/*.js",
+      "eslintConfig": "./.eslintrc"
+    },
+    "img": "src/img/**/*",
+    "fonts": "src/fonts/**/*"
+  },
+  "dest": {
+    "css": "./public/css",
+    "js": "./public/js",
+    "img": "./public/img",
+    "fonts": "./public/fonts"
+  },
+  "server": {
+    "js": {
+      "entry": "server.js",
+      "modules": "server/**/*.js"
+    }
+  },
+  "spec": {
+    "all": "./spec/frontend/**/*.js"
+  },
+  "gulp": {
+    "js": {
+      "all": "./gulp/**/*.js"
+    }
+  }
+}

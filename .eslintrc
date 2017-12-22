@@ -1,0 +1,17 @@
+{
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "globals": {
+    "window": false,
+    "document": false,
+    "ga": false,
+    $: true,
+    _: true,
+    L: true,
+    validate: true,
+    moment: true,
+  },
+  "rules": {
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "no-underscore-dangle": ["error", { "allow": ["_id", "__"] }]
+  }
+}
