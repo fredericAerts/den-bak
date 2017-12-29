@@ -1,0 +1,13 @@
+.table-wrapper {
+  max-width: 100%;
+  overflow: auto;
+
+  td,
+  th {
+    white-space: nowrap;
+
+    &:not(:first-child) {
+      text-align: center;
+    }
+  }
+}

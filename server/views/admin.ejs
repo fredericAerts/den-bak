@@ -1,24 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>De Ster | Den Bak</title>
-
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="favicon-194x194.png" sizes="194x194">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/style.min.css">
+    <% include ../includes/head.ejs %>
   </head>
   <body>
-    <span class="hello-world">Hello Admin!</span>
-    <script src="/js/script.min.js"></script>
+    <% include ../includes/components/header.ejs %>
+    <div class="container">
+      <div class="table-wrapper">
+        <table class="bordered">
+          <thead>
+            <tr>
+              <th>Klant</th>
+              <th>Tijdstip</th>
+              <th>Ontvangen</th>
+              <th>Klaar</th>
+              <th>Geleverd</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Klant één</td>
+              <td>5 dec. 14u00</td>
+              <td>
+                <span>
+                  <input name="status-klant-id-1" type="radio" id="test1" disabled="disabled" />
+                  <label for="test1"></label>
+                </span>
+              </td>
+              <td>
+                <span>
+                  <input name="status-klant-id-1" type="radio" id="test2" />
+                  <label for="test2"></label>
+                </span>
+              </td>
+              <td>
+                <span>
+                  <input name="status-klant-id-1" type="radio" id="test3" />
+                  <label for="test3"></label>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Klant twee</td>
+              <td>5 dec. 14u00</td>
+              <td>
+                <span>
+                  <input name="status-klant-id-2" type="radio" id="test4" disabled="disabled" />
+                  <label for="test4"></label>
+                </span>
+              </td>
+              <td>
+                <span>
+                  <input name="status-klant-id-2" type="radio" id="test5" />
+                  <label for="test5"></label>
+                </span>
+              </td>
+              <td>
+                <span>
+                  <input name="status-klant-id-2" type="radio" id="test6" />
+                  <label for="test6"></label>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <% include ../includes/foot.ejs %>
   </body>
 </html>

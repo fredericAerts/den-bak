@@ -1,7 +1,7 @@
 ((app) => {
   // eslint-disable-next-line no-param-reassign
   app.init = () => {
-    app.removeAllCookies.init();
+    app.datetimepicker.init();
   };
 })(window.app = window.app || {});
 

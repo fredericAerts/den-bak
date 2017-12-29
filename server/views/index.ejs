@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>De Ster | Den Bak</title>
-
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="favicon-194x194.png" sizes="194x194">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/style.min.css">
+    <% include ../includes/head.ejs %>
   </head>
   <body>
-    <span class="hello-world">Hello World!</span>
-    <script src="/js/script.min.js"></script>
+    <% include ../includes/components/header.ejs %>
+    <div class="container">
+      <div class="section">
+        <h5 class="center-align">Kies een datum en tijdstip</h5>
+        <div class="row">
+          <div class="col s6">
+            <label for="datum">Datum</label>
+            <input type="text" id="datum" name="datum" class="datepicker">
+          </div>
+          <div class="col s6">
+            <label for="tijdstip">Tijdstip</label>
+            <input type="text" id="tijdstip" name="tijdstip" class="timepicker">
+          </div>
+          <div class="col s12">
+            <a class="waves-effect waves-light btn right">button</a>
+          </div>
+        </div>
+      </div>
+      <div class="section center-align">
+        <h5>Jouw status</h5>
+        <ul class="collection">
+          <li class="collection-item">
+            <div>
+              Klaar voor ophaal
+              <span class="secondary-content">
+                <i class="material-icons">check_circle</i>
+              </span>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div>
+              Opgehaald
+              <span class="secondary-content">
+                <i class="material-icons">refresh</i>
+              </span>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div>
+              Afgeleverd
+              <span class="secondary-content">
+                <i class="material-icons">check_circle</i>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <% include ../includes/foot.ejs %>
   </body>
 </html>

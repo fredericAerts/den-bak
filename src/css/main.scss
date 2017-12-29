@@ -8,5 +8,10 @@
 
 /*  General
   =============================== */
-@import "./general/_reset";
+// @import "./general/_reset";
 @import "./general/_base";
+
+/*  Components
+  =============================== */
+@import "./components/header";
+@import "./components/table";
