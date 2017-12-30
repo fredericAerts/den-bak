@@ -5,52 +5,77 @@
   </head>
   <body>
     <% include ../includes/components/header.ejs %>
+    <input type="hidden" id="client-id" value="<%= client._id %>">
     <div class="container">
       <div class="section">
-        <h5 class="center-align">Kies een datum en tijdstip</h5>
+        <h5 class="center-align">
+          <%= client.statusIndex > 0 ? 'Datum en tijdstip' : 'Kies datum en tijdstip' %>
+        </h5>
         <div class="row">
           <div class="col s6">
             <label for="datum">Datum</label>
-            <input type="text" id="datum" name="datum" class="datepicker">
+            <input
+              type="text"
+              id="datum"
+              name="datum"
+              class="datepicker"
+              <%= (client.statusIndex > 0) ? 'disabled' : '' %>
+              value="<%= client.date ? client.date : '' %>"
+            >
           </div>
           <div class="col s6">
             <label for="tijdstip">Tijdstip</label>
-            <input type="text" id="tijdstip" name="tijdstip" class="timepicker">
+            <input
+              type="text"
+              id="tijdstip"
+              name="tijdstip"
+              class="timepicker"
+              <%= (client.statusIndex > 0) ? 'disabled' : '' %>
+              value="<%= client.time ? client.time : '' %>"
+            >
           </div>
-          <div class="col s12">
-            <a class="waves-effect waves-light btn right">button</a>
-          </div>
+          <% if (!client.statusIndex) { %>
+            <div class="col s12">
+              <a class="waves-effect waves-light btn right js-client-submit">button</a>
+            </div>
+          <% } %>
         </div>
       </div>
-      <div class="section center-align">
-        <h5>Jouw status</h5>
-        <ul class="collection">
-          <li class="collection-item">
-            <div>
-              Klaar voor ophaal
-              <span class="secondary-content">
-                <i class="material-icons">check_circle</i>
-              </span>
-            </div>
-          </li>
-          <li class="collection-item">
-            <div>
-              Opgehaald
-              <span class="secondary-content">
-                <i class="material-icons">refresh</i>
-              </span>
-            </div>
-          </li>
-          <li class="collection-item">
-            <div>
-              Afgeleverd
-              <span class="secondary-content">
-                <i class="material-icons">check_circle</i>
-              </span>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <% if (client.statusIndex > 0) { %>
+        <div class="section center-align">
+          <h5>Jouw status</h5>
+          <ul class="collection">
+            <li class="collection-item <%= client.statusIndex === 1 ? 'active' : '' %>">
+              <div>
+                Klaar voor ophaal
+                <span class="secondary-content">
+                  <i class="material-icons"><%= client.statusIndex === 1 ? 'refresh' : 'check_circle' %></i>
+                </span>
+              </div>
+            </li>
+            <li class="collection-item <%= client.statusIndex === 2 ? 'active' : '' %>">
+              <div>
+                Opgehaald
+                <% if (client.statusIndex > 1) { %>
+                  <span class="secondary-content">
+                    <i class="material-icons"><%= client.statusIndex === 2 ? 'refresh' : 'check_circle' %></i>
+                  </span>
+                <% } %>
+              </div>
+            </li>
+            <li class="collection-item <%= client.statusIndex === 3 ? 'active' : '' %>">
+              <div>
+                Afgeleverd
+                <% if (client.statusIndex > 2) { %>
+                  <span class="secondary-content">
+                    <i class="material-icons"><%= client.statusIndex === 3 ? 'refresh' : 'check_circle' %></i>
+                  </span>
+                <% } %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      <% } %>
     </div>
     <% include ../includes/foot.ejs %>
   </body>

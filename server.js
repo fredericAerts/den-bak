@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const auth = require('basic-auth');
 const _ = require('lodash');
 
 // const env = process.env.NODE_ENV || 'development';
@@ -36,33 +35,13 @@ app.use(bodyParser.json());
 
 /*  Routing & Authentication
     ================================================== */
-const users = [
-  { name: 'admin', pass: 'admin' },
-  { name: 'client', pass: 'client' },
-];
-
 app.use(express.static('./public'));
+app.use('/', require('./server/routes/routes')());
 
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
   res.send('User-agent: *\nDisallow: /');
 });
-
-app.get('*', (req, res) => {
-  const credentials = auth(req);
-  const user = _.find(users, credentials);
-
-  if (!credentials || !user) {
-    res.statusCode = 401;
-    res.setHeader('WWW-Authenticate', 'Basic realm="XLjqwZuu"');
-    res.end('Access denied');
-  } else if (user.name === 'admin') {
-    res.render('admin');
-  } else {
-    res.render('index');
-  }
-});
-
 
 /*  Listen
     ======================================================== */

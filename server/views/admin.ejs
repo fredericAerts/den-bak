@@ -11,60 +11,65 @@
           <thead>
             <tr>
               <th>Klant</th>
-              <th>Tijdstip</th>
+              <th>Klaar voor ophaal</th>
               <th>Ontvangen</th>
               <th>Klaar</th>
               <th>Geleverd</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Klant één</td>
-              <td>5 dec. 14u00</td>
-              <td>
-                <span>
-                  <input name="status-klant-id-1" type="radio" id="test1" disabled="disabled" />
-                  <label for="test1"></label>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <input name="status-klant-id-1" type="radio" id="test2" />
-                  <label for="test2"></label>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <input name="status-klant-id-1" type="radio" id="test3" />
-                  <label for="test3"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Klant twee</td>
-              <td>5 dec. 14u00</td>
-              <td>
-                <span>
-                  <input name="status-klant-id-2" type="radio" id="test4" disabled="disabled" />
-                  <label for="test4"></label>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <input name="status-klant-id-2" type="radio" id="test5" />
-                  <label for="test5"></label>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <input name="status-klant-id-2" type="radio" id="test6" />
-                  <label for="test6"></label>
-                </span>
-              </td>
-            </tr>
+            <% for(var i = 0; i < clients.length; i++) { %>
+              <tr data-client-id="<%= clients[i]._id %>" data-client-name="<%= clients[i].name %>">
+                <td><%= clients[i].name %></td>
+                <td>
+                  <%= clients[i].date %><br/>
+                  <%= clients[i].time %>
+                </td>
+                <td>
+                  <span>
+                    <input
+                      data-status-index="1"
+                      name="<%= clients[i]._id %>"
+                      type="radio"
+                      id="ontvangen-<%= clients[i]._id %>"
+                      <%= (clients[i].statusIndex === 1) ? 'checked' : '' %>
+                    />
+                    <label for="ontvangen-<%= clients[i]._id %>"></label>
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    <input
+                      data-status-index="2"
+                      name="<%= clients[i]._id %>"
+                      type="radio"
+                      id="klaar-<%= clients[i]._id %>"
+                      <%= (clients[i].statusIndex === 2) ? 'checked' : '' %>
+                    />
+                    <label for="klaar-<%= clients[i]._id %>"></label>
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    <input
+                      data-status-index="3"
+                      name="<%= clients[i]._id %>"
+                      type="radio"
+                      id="geleverd-<%= clients[i]._id %>"
+                    />
+                    <label for="geleverd-<%= clients[i]._id %>"></label>
+                  </span>
+                </td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
       </div>
+      <% if (!clients.length) { %>
+        <p class="center-align">
+          <i class="flow-text">Geen klanten in verwerking.</i>
+        </p>
+      <% } %>
     </div>
     <% include ../includes/foot.ejs %>
   </body>
