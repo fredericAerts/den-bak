@@ -28,11 +28,11 @@
                 <td>
                   <span>
                     <input
-                      data-status-index="1"
+                      data-status-index="2"
                       name="<%= clients[i]._id %>"
                       type="radio"
                       id="ontvangen-<%= clients[i]._id %>"
-                      <%= (clients[i].statusIndex === 1) ? 'checked' : '' %>
+                      <%= (clients[i].statusIndex === 2) ? 'checked' : '' %>
                     />
                     <label for="ontvangen-<%= clients[i]._id %>"></label>
                   </span>
@@ -40,11 +40,11 @@
                 <td>
                   <span>
                     <input
-                      data-status-index="2"
+                      data-status-index="3"
                       name="<%= clients[i]._id %>"
                       type="radio"
                       id="klaar-<%= clients[i]._id %>"
-                      <%= (clients[i].statusIndex === 2) ? 'checked' : '' %>
+                      <%= (clients[i].statusIndex === 3) ? 'checked' : '' %>
                     />
                     <label for="klaar-<%= clients[i]._id %>"></label>
                   </span>
@@ -52,7 +52,7 @@
                 <td>
                   <span>
                     <input
-                      data-status-index="3"
+                      data-status-index="4"
                       name="<%= clients[i]._id %>"
                       type="radio"
                       id="geleverd-<%= clients[i]._id %>"

@@ -18,25 +18,13 @@ const indexController = (ClientModel) => {
         getIndexPage(req, res, client);
       }
     });
-    // const queries = [];
-
-    // if (req.query.id) {
-    //   queries.push(OrganizerModel.findOne({ _id: req.query.id }));
-    // }
-
-    // Promise.all(queries).then((results, err) => {
-    //   if (err) {
-    //     res.render('admin'); // TODO: error handling
-    //   }
-    //   const organizer = results[0];
-
-    //   res.render('admin/create-organizer', { organizer });
-    // });
   };
 
   const post = (req, res) => {
     if (req.body.isAdmin === 'true') {
       updateClientStatus(req, res);
+    } else if (req.body.refresh === 'true') {
+      resetClientData(req, res);
     } else {
       submitClientDatetime(req, res);
     }
@@ -45,7 +33,7 @@ const indexController = (ClientModel) => {
   /*  Helper functions
       ================================================================================= */
   function getAdminPage(req, res, clients) {
-    res.render('admin', { clients: clients.filter(client => client.statusIndex > 0) });
+    res.render('admin', { clients: clients.filter(client => client.statusIndex > 0 && client.statusIndex < 4) });
   }
 
   function getIndexPage(req, res, client) {
@@ -57,17 +45,42 @@ const indexController = (ClientModel) => {
     return ClientModel.find({}).sort({ name: 1 });
   }
 
+  function resetClientData(req, res) {
+    ClientModel.findById(req.body._id, function (err, client) {
+      if (err) {
+        return res.send('nok');
+      }
+
+      const setData = {
+        date: undefined,
+        time: undefined,
+        statusIndex: 0,
+      };
+
+      client.set(setData);
+      client.save(function (err) {
+        if (err) {
+          return res.send('nok');
+        }
+
+        res.send('ok');
+      });
+    });
+  }
+
   function submitClientDatetime(req, res) {
     ClientModel.findById(req.body._id, function (err, client) {
       if (err) {
         return res.send('nok');
       }
 
-      client.set({
+      const setData = {
         date: req.body.date,
         time: req.body.time,
         statusIndex: 1,
-      });
+      };
+
+      client.set(setData);
       client.save(function (err) {
         if (err) {
           return res.send('nok');
@@ -85,12 +98,7 @@ const indexController = (ClientModel) => {
       }
 
       const setData = {
-        statusIndex: req.body.statusIndex > 2 ? 0 : req.body.statusIndex,
-      }
-
-      if (req.body.statusIndex > 2) {
-        setData.date = undefined;
-        setData.time = undefined;
+        statusIndex: req.body.statusIndex,
       }
 
       client.set(setData);
@@ -100,7 +108,7 @@ const indexController = (ClientModel) => {
           return res.send('nok');
         }
 
-        if (client.statusIndex === 0) {
+        if (client.statusIndex === 4) {
           res.send('done');
         } else {
           res.send('ok');

@@ -21,26 +21,18 @@
         ====================================================================== */
     function initClickHandler() {
       $submitButton.click((e) => {
+        const clientId =$('#client-id').val();
         const date = $datePicker.val();
         const time = $timePicker.val();
+        const submitType = e.target.dataset.submitType;
 
         const isValid = validate(date, time);
 
-        if (isValid) {
-          $.post( '/', {
-            isAdmin: false,
-            _id: $('#client-id').val(),
-            date: date,
-            time: time
-          } )
-          .done(function( data ) {
-            if (data === 'nok') {
-              alert('Er is een fout opgetreden...');
-            } else {
-              alert('Datum en tijdstip doorgegeven!');
-            }
-            location.reload();
-          });
+        if (submitType === 'submit' && isValid) {
+          submitDatetime(clientId, date, time);
+        }
+        else if (submitType === 'refresh') {
+          refreshData(clientId);
         }
       });
     }
@@ -61,6 +53,37 @@
       }
 
       return isValid;
+    }
+
+    function submitDatetime(clientId, date, time) {
+      $.post( '/', {
+        isAdmin: false,
+        _id: clientId,
+        date: date,
+        time: time
+      } )
+      .done(function( data ) {
+        if (data === 'nok') {
+          alert('Er is een fout opgetreden...');
+        } else {
+          alert('Datum en tijdstip doorgegeven!');
+        }
+        location.reload();
+      });
+    }
+
+    function refreshData(clientId) {
+      $.post( '/', {
+        isAdmin: false,
+        refresh: true,
+        _id: clientId,
+      } )
+      .done(function( data ) {
+        if (data === 'nok') {
+          alert('Er is een fout opgetreden...');
+        }
+        location.reload();
+      });
     }
   })();
 })(window.app = window.app || {});

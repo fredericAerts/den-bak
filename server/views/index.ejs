@@ -36,7 +36,17 @@
           </div>
           <% if (!client.statusIndex) { %>
             <div class="col s12">
-              <a class="waves-effect waves-light btn right js-client-submit">button</a>
+              <a class="waves-effect waves-light btn right js-client-submit" data-submit-type="submit">
+                <i class="material-icons left">check_circle</i>
+                Verwittig De Ster
+              </a>
+            </div>
+          <% } else if (client.statusIndex === 4) { %>
+            <div class="col s12">
+              <a class="waves-effect waves-light btn right js-client-submit" data-submit-type="refresh">
+                <i class="material-icons left">refresh</i>
+                Nieuwe bak
+              </a>
             </div>
           <% } %>
         </div>
@@ -49,13 +59,23 @@
               <div>
                 Klaar voor ophaal
                 <span class="secondary-content">
-                  <i class="material-icons"><%= client.statusIndex === 1 ? 'refresh' : 'check_circle' %></i>
+                  <i class="material-icons"><%= client.statusIndex === 0 ? 'refresh' : 'check_circle' %></i>
                 </span>
               </div>
             </li>
             <li class="collection-item <%= client.statusIndex === 2 ? 'active' : '' %>">
               <div>
                 Opgehaald
+                <% if (client.statusIndex > 0) { %>
+                  <span class="secondary-content">
+                    <i class="material-icons"><%= client.statusIndex === 1 ? 'refresh' : 'check_circle' %></i>
+                  </span>
+                <% } %>
+              </div>
+            </li>
+            <li class="collection-item <%= client.statusIndex === 3 ? 'active' : '' %>">
+              <div>
+                Klaar
                 <% if (client.statusIndex > 1) { %>
                   <span class="secondary-content">
                     <i class="material-icons"><%= client.statusIndex === 2 ? 'refresh' : 'check_circle' %></i>
@@ -63,7 +83,7 @@
                 <% } %>
               </div>
             </li>
-            <li class="collection-item <%= client.statusIndex === 3 ? 'active' : '' %>">
+            <li class="collection-item <%= client.statusIndex === 4 ? 'active' : '' %>">
               <div>
                 Afgeleverd
                 <% if (client.statusIndex > 2) { %>
